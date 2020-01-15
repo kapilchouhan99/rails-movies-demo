@@ -1,0 +1,28 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: aquamarine;">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class=<%= tab_class("movies") %>>
+        <a href="<%= movies_path(tab: "Movie")%>" class="nav-link">Movie List</a>
+      </li>
+      <li class=<%= tab_class("suggest") %>>
+        <a href="<%= movies_path(tab: "Suggest") %>" class="nav-link">Suggest</a>
+      </li>
+      <li class=<%= tab_class("genres") %>>
+        <a href="<%= movies_path(tab: "Genre") %>" class="nav-link">Genres</a>
+      </li>
+      <li class=<%= tab_class("stars") %>>
+        <a href="<%= movies_path(tab: "Star") %>" class="nav-link">Stars</a>
+      </li>
+    </ul>
+    <p class="navbar-text float-right">
+      <% if user_signed_in? %>
+        Logged in as <strong><%= current_user.email %></strong>.
+        <%= link_to 'Edit profile', edit_user_registration_path, :class => 'btn btn-outline-primary my-2 my-sm-0' %>
+        <%= link_to "Logout", destroy_user_session_path, method: :get, :class => 'btn btn-outline-danger my-2 my-sm-0' %>
+      <% else %>
+        <%= link_to "Sign up", new_user_registration_path, :class => 'btn btn-outline-success my-2 my-sm-0' %>
+        <%= link_to "Login", new_user_session_path, :class => 'btn btn-outline-primary my-2 my-sm-0' %>
+      <% end %>
+    </p>
+  </div>
+</nav>

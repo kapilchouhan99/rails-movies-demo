@@ -1,0 +1,23 @@
+<table>
+ <tr>
+  <th>Poster</th>
+  <th>Title</th>
+  <th>Genres</th>
+  <th>Stars</th>
+  <th>Action</th>
+ </tr>
+ <% @movies.each do |movie| %>
+ <tr>
+  <td><img src="<%= movie.image %>" alt="No poster found." class="card-img-top"></td>
+  <td><%= movie.title %></td>
+  <td><%= fetch_name(movie.genres) %></td>
+  <td><%= fetch_name(movie.stars) %></td>
+  <td>
+    <% if current_user.following?(movie) %>
+      <%= link_to "Unfollow", unfollow_movie_path(:id => movie.id, type: "Movie"), :method => :get, :class => "btn btn-primary"%></td>
+    <% else %>
+      <%= link_to "Follow", follow_movie_path(:id => movie.id, type: "Movie"), :method => :get, :class => "btn btn-primary"%></td>
+    <% end %>
+ </tr>
+ <% end %>
+</table>

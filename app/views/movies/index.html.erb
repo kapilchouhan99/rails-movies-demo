@@ -1,0 +1,51 @@
+<div>
+  <% if @page_tab == "movies" %>
+    <h1>Listing all Movies</h1>
+    <%= render :partial => "list", :movies => @movies %>
+  <% elsif @page_tab == "suggest" %>
+    <% if @movies.any? %>
+      <h1>Listing all Suggest Movies</h1>
+      <%= render :partial => "list", :movies => @movies %>
+    <% else %>
+      <h1>You have not followed any Movie, Star and Genre yet.</h1>
+    <% end %>
+  <% elsif @page_tab == "genres" %>
+    <h1>Listing all Genres</h1>
+    <table>
+     <tr>
+      <th>Name</th>
+      <th>Action</th>
+     </tr>
+     <% @genres.each do |genre| %>
+     <tr>
+      <td><%= genre.name %></td>
+      <td>
+        <% if current_user.following?(genre) %>
+          <%= link_to "Unfollow", unfollow_movie_path(:id => genre.id, type: "Genre"), :method => :get, :class => "btn btn-primary"%></td>
+        <% else %>
+          <%= link_to "Follow", follow_movie_path(:id => genre.id, type: "Genre"), :method => :get, :class => "btn btn-primary"%></td>
+        <% end %>
+     </tr>
+     <% end %>
+    </table>
+  <% elsif @page_tab == "stars" %>
+    <h1>Listing all Stars</h1>
+    <table>
+     <tr>
+      <th>Name</th>
+      <th>Action</th>
+     </tr>
+     <% @stars.each do |star| %>
+     <tr>
+      <td><%= star.name %></td>
+      <td>
+        <% if current_user.following?(star) %>
+          <%= link_to "Unfollow", unfollow_movie_path(:id => star.id, type: "Star"), :method => :get, :class => "btn btn-primary"%></td>
+        <% else %>
+          <%= link_to "Follow", follow_movie_path(:id => star.id, type: "Star"), :method => :get, :class => "btn btn-primary"%></td>
+        <% end %>
+     </tr>
+     <% end %>
+    </table>
+  <% end %>
+</div>
