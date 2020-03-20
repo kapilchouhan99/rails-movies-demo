@@ -26,9 +26,7 @@ $ gem install bundler
 ```
 
 
-**Step 2:** Install all the related package.
-
-Open of a terminal window in the root of the project **/rails-movies-demo** and type :
+**Step 2:** Open of a terminal window in the root of the project **/rails-movies-demo** and type :
 
 ```bash
 $ bundle install
