@@ -1,0 +1,1 @@
+$("#<%= params[:type] %>-<%= @object.id %>").html("<%= escape_javascript(render partial: 'buttons', locals: { object: @object, type: params[:type] } ) %>");

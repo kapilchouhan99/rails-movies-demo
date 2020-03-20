@@ -12,11 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2020_01_15_133637) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "follows", force: :cascade do |t|
     t.string "followable_type", null: false
-    t.integer "followable_id", null: false
+    t.bigint "followable_id", null: false
     t.string "follower_type", null: false
-    t.integer "follower_id", null: false
+    t.bigint "follower_id", null: false
     t.boolean "blocked", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -41,8 +44,8 @@ ActiveRecord::Schema.define(version: 2020_01_15_133637) do
   end
 
   create_table "movies_genres", force: :cascade do |t|
-    t.integer "movie_id"
-    t.integer "genre_id"
+    t.bigint "movie_id"
+    t.bigint "genre_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["genre_id"], name: "index_movies_genres_on_genre_id"
@@ -50,8 +53,8 @@ ActiveRecord::Schema.define(version: 2020_01_15_133637) do
   end
 
   create_table "movies_stars", force: :cascade do |t|
-    t.integer "movie_id"
-    t.integer "star_id"
+    t.bigint "movie_id"
+    t.bigint "star_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["movie_id"], name: "index_movies_stars_on_movie_id"
@@ -76,4 +79,8 @@ ActiveRecord::Schema.define(version: 2020_01_15_133637) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "movies_genres", "genres"
+  add_foreign_key "movies_genres", "movies"
+  add_foreign_key "movies_stars", "movies"
+  add_foreign_key "movies_stars", "stars"
 end

@@ -1,0 +1,5 @@
+<% if current_user.following?(object) %>
+  <%= link_to "Unfollow", unfollow_movie_path(:id => object.id, type: type), :method => :get, remote: true, :class => "btn btn-danger"%></td>
+<% else %>
+  <%= link_to "Follow", follow_movie_path(:id => object.id, type: type), :method => :get, remote: true, :class => "btn btn-primary"%></td>
+<% end %>

@@ -2,10 +2,12 @@
   <% if @page_tab == "movies" %>
     <h1>Listing all Movies</h1>
     <%= render :partial => "list", :movies => @movies %>
+    <%== pagy_bootstrap_nav(@pagy) %>
   <% elsif @page_tab == "suggest" %>
     <% if @movies.any? %>
       <h1>Listing all Suggest Movies</h1>
       <%= render :partial => "list", :movies => @movies %>
+      <%== pagy_bootstrap_nav(@pagy) %>
     <% else %>
       <h1>You have not followed any Movie, Star and Genre yet.</h1>
     <% end %>
@@ -20,14 +22,13 @@
      <tr>
       <td><%= genre.name %></td>
       <td>
-        <% if current_user.following?(genre) %>
-          <%= link_to "Unfollow", unfollow_movie_path(:id => genre.id, type: "Genre"), :method => :get, :class => "btn btn-primary"%></td>
-        <% else %>
-          <%= link_to "Follow", follow_movie_path(:id => genre.id, type: "Genre"), :method => :get, :class => "btn btn-primary"%></td>
-        <% end %>
+        <div id="Genre-<%= genre.id %>">
+          <%= render :partial => "movies/buttons", :locals => { object: genre, type: "Genre" } %>
+        </div>
      </tr>
      <% end %>
     </table>
+    <%== pagy_bootstrap_nav(@pagy) %>
   <% elsif @page_tab == "stars" %>
     <h1>Listing all Stars</h1>
     <table>
@@ -39,13 +40,12 @@
      <tr>
       <td><%= star.name %></td>
       <td>
-        <% if current_user.following?(star) %>
-          <%= link_to "Unfollow", unfollow_movie_path(:id => star.id, type: "Star"), :method => :get, :class => "btn btn-primary"%></td>
-        <% else %>
-          <%= link_to "Follow", follow_movie_path(:id => star.id, type: "Star"), :method => :get, :class => "btn btn-primary"%></td>
-        <% end %>
+        <div id="Star-<%= star.id %>">
+          <%= render :partial => "movies/buttons", :locals => { object: star, type: "Star" } %>
+        </div>
      </tr>
      <% end %>
     </table>
+    <%== pagy_bootstrap_nav(@pagy) %>
   <% end %>
 </div>
