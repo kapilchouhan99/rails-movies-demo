@@ -4,7 +4,7 @@ This is a [Ruby on Rails](https://rubyonrails.org/) based implementation of the 
 
 
 
-Here is [The demo on Heroku](https://boggle-game-rails-react.herokuapp.com/)
+Here is [The demo on Heroku](https://rails-movies-demo.herokuapp.com/)
 
 
 
